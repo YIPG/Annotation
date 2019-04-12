@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "nodemon --exec ts-node app.ts"
+  },
+  "name": "myapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.11",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.3"
+  }
+}
