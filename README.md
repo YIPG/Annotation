@@ -9,4 +9,4 @@ After cloning repository, `Yarn` commands install all dependencies.
 `Yarn dev` starts to load `frontend/index.html`. Entry point is `frontend/index.tsx`.
 
 ### `Yarn start-server`
-`Yarn start-server` starts to load `sever/app.ts`. In `app.ts`, I connect to the local MySQL server (dataset @ https://dev.mysql.com/doc/index-other.html). The server auth setting is weak and dont use it in the production.
+`Yarn start-server` starts to load `sever/app.ts`. In `app.ts`, we connect to the local MySQL server. The server auth setting is weak and dont use it in the production.
