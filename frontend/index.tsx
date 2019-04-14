@@ -1,9 +1,4 @@
-import { h, render } from "preact";
+import { h, render } from "preact"
+import BasicTable from "./table"
 
-render(
-  <div id="foo">
-    <span>Hello, world!</span>
-    <button onClick={e => alert("hi!")}>Click Me</button>
-  </div>,
-  document.body
-);
+render(<BasicTable />, document.body)
