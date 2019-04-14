@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start-server": "nodemon --exec ts-node server/app.ts",
-    "dev": "parcel frontend/index.html",
+    "dev": "parcel frontend/index.html --open",
     "build": "parcel build frontend.html"
   },
   "name": "myapp",
