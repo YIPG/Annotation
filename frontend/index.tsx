@@ -1,4 +1,5 @@
-import { h, render } from "preact"
-import BasicTable from "./table"
+import React from "react"
+import ReactDOM from "react-dom"
+import { AppRouter } from "./root"
 
-render(<BasicTable />, document.body)
+ReactDOM.render(<AppRouter />, document.getElementById("app"))

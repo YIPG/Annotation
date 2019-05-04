@@ -1,34 +1,12 @@
-import * as express from "express";
-import * as mysql from "mysql";
-const app = express();
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "world"
-});
+import express from "express"
+import mongoose from "mongoose"
+import cors from "cors"
+import { upload } from "./upload"
 
-connection.connect();
+const app = express()
 
-const queryPV = async sql => {
-  try {
-    const rows = await connection.query(sql);
-    return rows;
-  } catch (err) {
-    console.log(err);
-  }
-};
+app.use(cors())
 
-app.get("/sql", (req, res) => {
-  // const rows = queryPV("SELECT * FROM country LIMIT 10;");
-  connection.query("SELECT * FROM country LIMIT 10;", (err, rows) => {
-    if (err) console.log(err);
-    console.log(rows);
-    res.send("hello");
-  });
-  console.log("成功");
-});
+app.post("/upload", upload)
 
-app.get("/", (req, res) => res.send("hello"));
-
-app.listen(3000, () => console.log("working at 3000"));
+app.listen(3333, () => console.log("working at 3333"))

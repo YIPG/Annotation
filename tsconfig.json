@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "jsxFactory": "h",
+    "esModuleInterop": true  
   },
 }
