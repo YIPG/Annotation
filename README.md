@@ -12,7 +12,7 @@ You will need to prepare node(8.10.0 or later) and MongoDB on local.
 
 ### Yarn
 ```
-Yarn
+yarn
 ```
 ### npm
 ```
@@ -23,7 +23,7 @@ npm intasll
 First you need to launch the server.
 ### Yarn
 ```
-Yarn start-server
+yarn start-server
 ```
 ### npm
 ```
@@ -34,7 +34,7 @@ Then, launch the frontend.
 
 ### Yarn
 ```
-Yarn dev
+yarn dev
 ```
 ### npm
 ```
@@ -45,7 +45,7 @@ In order to build the app, run below commands.
 
 ### Yarn
 ```
-Yarn build
+yarn build
 ```
 ### npm
 ```
