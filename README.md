@@ -1,5 +1,7 @@
 # Annotation App
 
+<img src="https://user-images.githubusercontent.com/19145527/57267784-4082fe80-70bc-11e9-9c4b-c9c3ac55d46f.gif" width="500px" />
+
 This is the web app for annotation tasks.
 
 ## Caution
