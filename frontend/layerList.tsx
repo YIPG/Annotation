@@ -16,7 +16,6 @@ export const LayerList = props => {
   const { h, w, l } = props
 
   function update() {
-    console.log("ここがバグってるの？")
     console.log(`h is ${h}, w is ${w}, l is ${l}`)
     const hNum = Math.ceil(h / l),
       wNum = Math.ceil(w / l)
@@ -31,7 +30,7 @@ export const LayerList = props => {
       tmpWList.push(i * l)
     }
     if (tmpHList.length !== 0 && tmpWList.length !== 0) {
-      console.log("今からhwListをセットするよ")
+      console.log("hwListをセット")
       tmpHList.forEach(height => {
         tmpWList.forEach(width => {
           tmphwList.push({

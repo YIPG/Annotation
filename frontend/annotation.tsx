@@ -24,7 +24,7 @@ export const Annotation = props => {
   return (
     <ImgWrapper>
       <Img
-        src="https://www.preferred-networks.jp/wp-content/uploads/2017/02/PFN_logo_color_whiteback.png"
+        src={props.src}
         ref={el => (this.imgEl = el)}
         onLoad={() => {
           const { height, width } = this.imgEl
@@ -33,7 +33,6 @@ export const Annotation = props => {
           setLength(height / props.column)
         }}
       />
-      {/* <LayerList /> */}
       <LayerList h={height} w={width} l={length} />
     </ImgWrapper>
   )

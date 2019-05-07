@@ -1,6 +1,14 @@
 import React, { useCallback, useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import styled from "styled-components"
+import { Redirect } from "react-router-dom"
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+`
 
 const getColor = props => {
   if (props.isDragAccept) {
@@ -71,6 +79,9 @@ const ButtonContainer = styled.div`
 
 export function Upload() {
   const [files, setFiles] = useState([])
+  const [columns, setColumns] = useState("")
+  const [name, setName] = useState("")
+  const [id, setId] = useState("")
   const [uploading, setUploading] = useState(false)
   const [successfulUploaded, setSuccessfulUploaded] = useState(false)
 
@@ -96,16 +107,11 @@ export function Upload() {
   }, [])
 
   const uploadFiles = useCallback(async () => {
-    console.log("今から送る")
-    console.log(files)
-    const promises = []
-    files.forEach(file => {
-      console.log(file)
-      promises.push(sendRequest(file))
-    })
     try {
-      await Promise.all(promises)
-      console.log("送り終わった")
+      const response = await sendRequest(files)
+      const dbId = await response.text()
+      setId(dbId)
+      console.log(`${dbId}を保存しました`)
       setUploading(false)
       setSuccessfulUploaded(true)
     } catch (e) {
@@ -115,16 +121,17 @@ export function Upload() {
     }
   }, [files])
 
-  const sendRequest = file => {
-    console.log("asdf")
-    return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest()
-
-      const formData = new FormData()
+  const sendRequest = async files => {
+    console.log(`Now start to send server: Task: ${name}, Divide: ${columns}`)
+    const formData = new FormData()
+    files.forEach(file => {
       formData.append("file", file, file.name)
-      console.log(formData)
-      req.open("POST", "http://localhost:3333/upload")
-      req.send(formData)
+    })
+    formData.append("label", name)
+    formData.append("column", columns)
+    return fetch("http://localhost:3333/upload", {
+      method: "POST",
+      body: formData
     })
   }
 
@@ -137,7 +144,7 @@ export function Upload() {
   } = useDropzone({ onDrop, accept: "image/*" })
 
   const thumbs = files.map(file => (
-    <Thumb ket={file.name}>
+    <Thumb key={file.name}>
       <ThumbInner>
         <ThumbImg src={file.preview} />
       </ThumbInner>
@@ -151,8 +158,29 @@ export function Upload() {
     [files]
   )
 
+  if (successfulUploaded) return <Redirect to={"tasks/" + id} />
+
   return (
     <div>
+      <FormWrapper>
+        <label>
+          Annotation Label
+          <input
+            type="text"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+        </label>
+        <label>
+          Vertical Division
+          <input
+            type="number"
+            min="1"
+            value={columns}
+            onChange={e => setColumns(e.target.value)}
+          />
+        </label>
+      </FormWrapper>
       <Container
         {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
       >
@@ -165,11 +193,4 @@ export function Upload() {
       </ButtonContainer>
     </div>
   )
-}
-
-function Foo() {
-  const memoizedHandleClick = useCallback(() => {
-    console.log("Click happened")
-  }, []) // Tells React to memoize regardless of arguments.
-  return <button onClick={memoizedHandleClick}>Click Me</button>
 }

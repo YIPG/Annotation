@@ -8,7 +8,7 @@ export const AppRouter = () => {
     <Router>
       <div>
         <Route exact path="/" component={Upload} />
-        <Route path="/app" component={App} />
+        <Route path="/tasks/:id" component={App} />
       </div>
     </Router>
   )

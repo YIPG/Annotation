@@ -1,12 +1,58 @@
-# Fullstack-Boilerplate
-this repo is minimum template for the developer who develops app with **typescript**, **expressjs**, **preact**, **parcel**.
+# Annotation App
 
-## Process
-### `Yarn`
-After cloning repository, `Yarn` commands install all dependencies.
+This is the web app for annotation tasks.
 
-### `Yarn dev`
-`Yarn dev` starts to load `frontend/index.html`. Entry point is `frontend/index.tsx`.
+## Caution
+This project is on the way.
+You can just upload tasks and view images and annotate each image.  
+** But you cannot save annotation result to DB yet**
 
-### `Yarn start-server`
-`Yarn start-server` starts to load `sever/app.ts`. In `app.ts`, we connect to the local MySQL server. The server auth setting is weak and dont use it in the production.
+## Installation
+You will need to prepare node(8.10.0 or later) and MongoDB on local.
+
+### Yarn
+```
+Yarn
+```
+### npm
+```
+npm intasll
+```
+
+## Quick Start
+First you need to launch the server.
+### Yarn
+```
+Yarn start-server
+```
+### npm
+```
+npm run start-server
+```
+
+Then, launch the frontend.
+
+### Yarn
+```
+Yarn dev
+```
+### npm
+```
+npm run dev
+```
+
+In order to build the app, run below commands.
+
+### Yarn
+```
+Yarn build
+```
+### npm
+```
+npm run build
+```
+
+## Tasks
+You can see the images you uploaded in `public/images`.
+
+You can share the tasks via URL. `/tasks/TASK_ID`
