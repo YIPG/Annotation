@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, createContext } from "react"
 import styled from "styled-components"
 import { Annotation } from "./annotation"
 import { string } from "prop-types"
+import { create } from "domain";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,8 @@ const ButtonWrapper = styled.div`
 const Button = styled.button`
   margin: 30px;
 `
+
+export const IdContext = createContext(null)
 
 export const App = ({ match }) => {
   const [index, setIndex] = useState(0)
@@ -39,8 +42,6 @@ export const App = ({ match }) => {
     setFetchSuccess(true)
   }
 
-  const sendData = async name => {}
-
   if (!fetchSuccess)
     return (
       <Wrapper>
@@ -50,13 +51,15 @@ export const App = ({ match }) => {
   return (
     <Wrapper>
       <h1>Select all squares with {data.task}</h1>
-      <Annotation
-        column={data.divide}
-        // FIX ME
-        // FOR DEPLOY, DONT USE LOCALHOST
-        src={"http://localhost:3333/uploads/" + data.data[index].filename}
-        name={data.data[index].filename}
-      />
+      <IdContext.Provider value={match.params.id}>
+        <Annotation
+          column={data.divide}
+          // FIX ME
+          // FOR DEPLOY, DONT USE LOCALHOST
+          src={"http://localhost:3333/uploads/" + data.data[index].filename}
+          name={data.data[index].filename}
+        />
+      </IdContext.Provider>
       <ButtonWrapper>
         {index !== 0 && (
           <Button onClick={() => setIndex(index - 1)}>前へ</Button>

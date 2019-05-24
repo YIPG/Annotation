@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "nodemon --exec ts-node server/app.ts & parcel frontend/index.html --open" ,
     "start-server": "nodemon --exec ts-node server/app.ts",
     "dev": "parcel frontend/index.html --open",
     "build": "parcel build frontend/index.html"

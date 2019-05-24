@@ -57,7 +57,7 @@ export const LayerList = props => {
     // console.log(hw)
     return (
       <li key={String(hw.height) + String(hw.width)}>
-        <LayerItem bottom={hw.height} left={hw.width} length={l} />
+        <LayerItem top={hw.height} left={hw.width} length={l} />
       </li>
     )
   })

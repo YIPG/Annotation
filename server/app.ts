@@ -27,20 +27,20 @@ db.once("open", () => console.log("connection OK"))
 const taskSchema = new mongoose.Schema({
   task: String,
   divide: Number,
-  images: [{ filepath: String, regions: [] }],
+  images: [],
   data: []
 })
 
 const Task = mongoose.model("Task", taskSchema)
 
-app.post("/upload", upload.array("file"), async (req, res, next) => {
+app.post("/upload", upload.array("file"), async (req, res) => {
   // console.log(req.files)
   // console.log(req.body)
   const images = req.files.map(f =>
     Object.assign(
       {},
       {
-        filepath: f.originalname,
+        pathname: f.originalname,
         regions: []
       }
     )
@@ -49,11 +49,8 @@ app.post("/upload", upload.array("file"), async (req, res, next) => {
   const task = new Task({
     task: req.body.label,
     divide: req.body.column,
-    data: req.files
-    // images: req.files,map(f=>Object.assign({}, {
-    //   filepath: f.originalname,
-    //   regions: []
-    // }))
+    data: req.files,
+    images: images
   })
 
   const result = await task.save()
@@ -62,19 +59,22 @@ app.post("/upload", upload.array("file"), async (req, res, next) => {
 })
 
 app.post("/db", async (req, res) => {
-  console.log(req.body.id)
-  const result = await Task.update(
-    {
-      _id: req.body.id
-      // images.pathname: req.body.pathname
-    },
-    {}
-  )
-  result.images.regions.push(req.body.region)
+  const targetTask = await Task.findById(req.body.id)
+  res.send(targetTask)
 })
 
 app.post("/update", async (req, res) => {
   const targetTask = await Task.findById(req.body.id)
+  console.log(req.body)
+  // console.log(req.body.id)
+  // const result = await Task.update(
+  //   {
+  //     _id: req.body.id
+  //     // images.pathname: req.body.pathname
+  //   },
+  //   {}
+  // )
+  // result.images.regions.push(req.body.region)
 })
 
 app.listen(3333, () => console.log("working at 3333"))
