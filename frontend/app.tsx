@@ -26,22 +26,21 @@ export const App = ({ match }) => {
   const [data, setData] = useState(null);
   const [fetchSuccess, setFetchSuccess] = useState(false);
   useEffect(() => {
+    const fetchData = async id => {
+      const res = await fetch("http://localhost:3333/db", {
+        method: "POST",
+        body: JSON.stringify({ id: id }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const result = await res.json();
+      console.log(result);
+      setData(result);
+      setFetchSuccess(true);
+    };
     fetchData(match.params.id);
   }, [match.params.id]);
-
-  const fetchData = async id => {
-    const res = await fetch("http://localhost:3333/db", {
-      method: "POST",
-      body: JSON.stringify({ id: id }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const result = await res.json();
-    console.log(result);
-    setData(result);
-    setFetchSuccess(true);
-  };
 
   if (!fetchSuccess)
     return (
