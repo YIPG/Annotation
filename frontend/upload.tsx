@@ -1,34 +1,34 @@
-import React, { useCallback, useState, useEffect } from "react"
-import { useDropzone } from "react-dropzone"
-import styled from "styled-components"
-import { Redirect } from "react-router-dom"
+import React, { useCallback, useState, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 30px;
-`
+`;
 
 const getColor = props => {
   if (props.isDragAccept) {
-    return "#00e676"
+    return "#00e676";
   }
   if (props.isDragReject) {
-    return "#ff1744"
+    return "#ff1744";
   }
   if (props.isDragActive) {
-    return "#2196f3"
+    return "#2196f3";
   }
-  return "#eeeeee"
-}
+  return "#eeeeee";
+};
 
 const ThumbsContainer = styled.aside`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 16px;
-`
+`;
 
 const Thumb = styled.div`
   display: inline-flex;
@@ -40,19 +40,19 @@ const Thumb = styled.div`
   height: 100;
   padding: 4;
   box-sizing: border-box;
-`
+`;
 
 const ThumbInner = styled.div`
   display: flex;
   min-width: 0;
   overflow: hidden;
-`
+`;
 
 const ThumbImg = styled.img`
   display: block;
   width: auto;
   height: 100%;
-`
+`;
 
 const Container = styled.div`
   flex: 1;
@@ -70,20 +70,20 @@ const Container = styled.div`
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
-`
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 export function Upload() {
-  const [files, setFiles] = useState([])
-  const [columns, setColumns] = useState("")
-  const [name, setName] = useState("")
-  const [id, setId] = useState("")
-  const [uploading, setUploading] = useState(false)
-  const [successfulUploaded, setSuccessfulUploaded] = useState(false)
+  const [files, setFiles] = useState([]);
+  const [columns, setColumns] = useState("");
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [successfulUploaded, setSuccessfulUploaded] = useState(false);
 
   const onDrop = useCallback(acceptedFiles => {
     setFiles(
@@ -92,7 +92,7 @@ export function Upload() {
           preview: URL.createObjectURL(file)
         })
       )
-    )
+    );
     // const reader = new FileReader()
 
     // reader.onabort = () => console.log("file reading was aborted")
@@ -104,36 +104,36 @@ export function Upload() {
     // }
 
     // acceptedFiles.forEach(file => reader.readAsBinaryString(file))
-  }, [])
+  }, []);
 
   const uploadFiles = useCallback(async () => {
     try {
-      const response = await sendRequest(files)
-      const dbId = await response.text()
-      setId(dbId)
-      console.log(`${dbId}を保存しました`)
-      setUploading(false)
-      setSuccessfulUploaded(true)
+      const response = await sendRequest(files);
+      const dbId = await response.text();
+      setId(dbId);
+      console.log(`${dbId}を保存しました`);
+      setUploading(false);
+      setSuccessfulUploaded(true);
     } catch (e) {
-      console.log(e)
-      setUploading(false)
-      setSuccessfulUploaded(false)
+      console.log(e);
+      setUploading(false);
+      setSuccessfulUploaded(false);
     }
-  }, [files])
+  }, [files]);
 
   const sendRequest = async files => {
-    console.log(`Now start to send server: Task: ${name}, Divide: ${columns}`)
-    const formData = new FormData()
+    console.log(`Now start to send server: Task: ${name}, Divide: ${columns}`);
+    const formData = new FormData();
     files.forEach(file => {
-      formData.append("file", file, file.name)
-    })
-    formData.append("label", name)
-    formData.append("column", columns)
+      formData.append("file", file, file.name);
+    });
+    formData.append("label", name);
+    formData.append("column", columns);
     return fetch("http://localhost:3333/upload", {
       method: "POST",
       body: formData
-    })
-  }
+    });
+  };
 
   const {
     getRootProps,
@@ -141,7 +141,7 @@ export function Upload() {
     isDragActive,
     isDragReject,
     isDragAccept
-  } = useDropzone({ onDrop, accept: "image/*" })
+  } = useDropzone({ onDrop, accept: "image/*" });
 
   const thumbs = files.map(file => (
     <Thumb key={file.name}>
@@ -149,16 +149,16 @@ export function Upload() {
         <ThumbImg src={file.preview} />
       </ThumbInner>
     </Thumb>
-  ))
+  ));
 
   useEffect(
     () => () => {
-      files.forEach(file => URL.revokeObjectURL(file.preview))
+      files.forEach(file => URL.revokeObjectURL(file.preview));
     },
     [files]
-  )
+  );
 
-  if (successfulUploaded) return <Redirect to={"tasks/" + id} />
+  if (successfulUploaded) return <Redirect to={"tasks/" + id} />;
 
   return (
     <div>
@@ -191,6 +191,7 @@ export function Upload() {
       <ButtonContainer>
         <button onClick={uploadFiles}>送信する</button>
       </ButtonContainer>
+      <a href="http://localhost:1234/admin">管理画面へ</a>
     </div>
-  )
+  );
 }

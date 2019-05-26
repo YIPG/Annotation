@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import { LayerItem } from "./layerItem"
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { LayerItem } from "./layerItem";
 
 const LayerWrapper = styled.div`
   position: absolute;
@@ -9,62 +9,57 @@ const LayerWrapper = styled.div`
   left: 0;
   height: ${props => props.h};
   width: ${props => props.w};
-`
+`;
 
 export const LayerList = props => {
-  const [hwList, setHWList] = useState([])
-  const { h, w, l } = props
+  const [hwList, setHWList] = useState([]);
+  const { h, w, l } = props;
 
   function update() {
-    console.log(`h is ${h}, w is ${w}, l is ${l}`)
+    console.log(`h is ${h}, w is ${w}, l is ${l}`);
     const hNum = Math.ceil(h / l),
-      wNum = Math.ceil(w / l)
+      wNum = Math.ceil(w / l);
     const tmpHList = [],
       tmpWList = [],
-      tmphwList = []
-    console.log(`hNum is ${hNum}, wnum is ${wNum}`)
+      tmphwList = [];
+    console.log(`hNum is ${hNum}, wnum is ${wNum}`);
     for (let i = 0; i < hNum; i++) {
-      tmpHList.push(i * l)
+      tmpHList.push(i * l);
     }
     for (let i = 0; i < wNum; i++) {
-      tmpWList.push(i * l)
+      tmpWList.push(i * l);
     }
     if (tmpHList.length !== 0 && tmpWList.length !== 0) {
-      console.log("hwListをセット")
+      console.log("hwListをセット");
       tmpHList.forEach(height => {
         tmpWList.forEach(width => {
           tmphwList.push({
             height: height,
             width: width
-          })
-        })
-      })
-      setHWList(tmphwList)
-      console.log(`hwlistのセットが終わった. ${hwList}`)
+          });
+        });
+      });
+      setHWList(tmphwList);
+      console.log(`hwlistのセットが終わった. ${hwList}`);
       // console.log(`セットしたぜ. Hlist is ${hList[0]}`)
     }
   }
 
   useEffect(() => {
-    update()
-
-    // setHList(this.hList)
-    // console.log(`useEffectが呼ばれた. Hlistの長さは${hList.length}`)
-  }, [h])
+    update();
+  }, [h]);
 
   const layerList = hwList.map(hw => {
-    console.log("今からループするよ")
-    // console.log(hw)
     return (
       <li key={String(hw.height) + String(hw.width)}>
         <LayerItem top={hw.height} left={hw.width} length={l} />
       </li>
-    )
-  })
+    );
+  });
 
   return (
     <LayerWrapper h={h} w={w}>
       {layerList}
     </LayerWrapper>
-  )
-}
+  );
+};

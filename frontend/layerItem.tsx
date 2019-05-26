@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react"
-import styled from "styled-components"
-import { IdContext } from './app'
+import React, { useState, useContext } from "react";
+import styled from "styled-components";
+import { IdContext, fileNameContext } from "./app";
 
 const Layer = styled.div`
   position: absolute;
@@ -13,39 +13,55 @@ const Layer = styled.div`
     border: ${props => !props.clicked && "thin solid plum"};
   }
   border: ${props => props.clicked && "medium solid blueviolet"};
-`
+`;
 
 export const LayerItem = props => {
-  const [clicked, setClick] = useState(false)
-  const id = useContext(IdContext)
+  const [clicked, setClick] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const id = useContext(IdContext);
+  const fileName = useContext(fileNameContext);
 
   const updateRegions = async id => {
-    console.log("いまからクリック情報をサーバーにおくるよ")
-
+    setLoading(true);
     // クリックごとに座標データを送信
-    await fetch("http://localhost:3333/update", {
+
+    const res = await fetch("http://localhost:3333/update", {
       method: "POST",
       body: JSON.stringify({
         id: id,
-        region: { x: props.left, y: props.top, w: props.length, h: props.length }
+        fileName: fileName,
+        add: !clicked,
+        region: {
+          x: props.left,
+          y: props.top,
+          w: props.length,
+          h: props.length
+        }
       }),
       headers: {
         "Content-Type": "application/json"
-      },
-    })
-    console.log("クリック情報をサーバーにおくったよ")
-  }
+      }
+    });
+
+    if (res.ok) {
+      setLoading(false);
+      setClick(!clicked);
+    } else {
+      setError(true);
+    }
+    console.log("クリック情報をサーバーにおくったよ");
+  };
 
   return (
     <Layer
       onClick={() => {
-        setClick(!clicked)
-        updateRegions(id)
+        updateRegions(id);
       }}
       clicked={clicked}
       left={props.left}
       top={props.top}
       length={props.length}
     />
-  )
-}
+  );
+};
