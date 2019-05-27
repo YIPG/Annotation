@@ -7,10 +7,20 @@ const Wrapper = styled.div`
   border-radius: 4px;
   max-width: 750px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
   width: 80%;
+  padding: 0 20px;
 `;
+
+const TaskWrapper = styled.h3`
+  margin-right:auto;
+`;
+
+const AWrapper = styled.h3`
+  margin-left:10px;
+`;
+
 
 const Button = styled.button`
   white-space: nowrap;
@@ -41,15 +51,15 @@ export const TaskItem = props => {
   const allImages = props.data.images;
   return (
     <Wrapper>
-      <h3>タスク名: {props.data.task}</h3>
+      <TaskWrapper>タスク名: {props.data.task}</TaskWrapper>
       <h3>
         進捗:
         {getPercentage(clickedImages.length, allImages.length)}% (
         {clickedImages.length}枚/{allImages.length}枚中)
       </h3>
-      <a href={"http://localhost:3333/getResult?id=" + props.data._id} download={props.data.task + ".json"}>
+      <AWrapper href={"http://localhost:3333/getResult?id=" + props.data._id} download={props.data.task + ".json"}>
         <Button>進捗ダウンロード(JSON)</Button>
-      </a>
+      </AWrapper>
     </Wrapper>
   );
 };
