@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   align-items: center;
   width: 80%;
   padding: 0 20px;
+  margin: 5px 0;
 `;
 
 const TaskWrapper = styled.h3`

@@ -25,7 +25,7 @@ export const Admin = () => {
   if (loading) return <h1>Loading...</h1>;
   return (
     <Wrapper>
-      <h1>タスク数は{data.length}です</h1>
+      <h1>タスク数: {data.length}</h1>
       <TaskList data={data} />
     </Wrapper>
   );
