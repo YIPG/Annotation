@@ -101,8 +101,8 @@ app.post("/update", async (req, res) => {
       req.body.add
         ? targetTask.images[targetIndex].regions.push(req.body.region)
         : (targetTask.images[targetIndex].regions = targetTask.images[
-            targetIndex
-          ].regions.filter(item => !isEqualPoint(item, req.body.region)));
+          targetIndex
+        ].regions.filter(item => !isEqualPoint(item, req.body.region)));
     }
 
     console.log(targetTask.images[targetIndex].regions);
@@ -121,5 +121,17 @@ app.get("/progress", async (req, res) => {
   const result = await Task.find();
   res.send(result);
 });
+
+app.get("/getResult", async (req, res) => {
+  let target = await Task.findById(req.query.id)
+  const result = {
+    images: target.images,
+    task: target.task,
+    divide: target.divide
+  }
+
+  res.attachment(`${target.task}.json`)
+  res.send(result)
+})
 
 app.listen(3333, () => console.log("working at 3333"));

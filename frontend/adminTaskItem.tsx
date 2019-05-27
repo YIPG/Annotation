@@ -47,7 +47,7 @@ export const TaskItem = props => {
         {getPercentage(clickedImages.length, allImages.length)}% (
         {clickedImages.length}枚/{allImages.length}枚中)
       </h3>
-      <a href="">
+      <a href={"http://localhost:3333/getResult?id=" + props.data._id} download={props.data.task + ".json"}>
         <Button>進捗ダウンロード(JSON)</Button>
       </a>
     </Wrapper>
