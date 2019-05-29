@@ -1,13 +1,16 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import { IdContext, fileNameContext } from "./index"
 
-const Layer = styled.div`
+const Layer = styled.div.attrs(({ top, left, length }) => ({
+  style: {
+    top: top,
+    left: left,
+    height: length,
+    width: length
+  }
+}))`
   position: absolute;
-  top: ${props => props.top};
-  left: ${props => props.left};
-  height: ${props => props.length};
-  width: ${props => props.length};
   box-sizing: border-box;
   &:hover {
     border: ${props => !props.clicked && "thin solid plum"};
