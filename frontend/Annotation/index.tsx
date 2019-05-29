@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from "react"
 import styled from "styled-components"
 import { Main } from "./main"
+import { Button } from "../util/Button"
 
 const Wrapper = styled.div`
   margin-top: 1rem;
@@ -11,10 +12,11 @@ const Wrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   flex-direction: row;
+  padding: 2rem;
 `
 
-const Button = styled.button`
-  margin: 30px;
+const NavButton = styled(Button)`
+  margin: 0 2rem;
 `
 
 export const IdContext = createContext(null)
@@ -61,13 +63,12 @@ export const Annotation = ({ match }) => {
       </IdContext.Provider>
       <ButtonWrapper>
         {index !== 0 && (
-          <Button onClick={() => setIndex(index - 1)}>前へ</Button>
+          <NavButton onClick={() => setIndex(index - 1)}>前へ</NavButton>
         )}
         {index !== data.data.length - 1 && (
-          <Button onClick={() => setIndex(index + 1)}>次へ</Button>
+          <NavButton onClick={() => setIndex(index + 1)}>次へ</NavButton>
         )}
       </ButtonWrapper>
-      <a href="http://localhost:1234">タスクアップロードページへ</a>
     </Wrapper>
   )
 }
