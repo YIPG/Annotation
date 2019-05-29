@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
-import { IdContext, fileNameContext } from "./app";
+import React, { useState, useContext } from "react"
+import styled from "styled-components"
+import { IdContext, fileNameContext } from "./app"
 
 const Layer = styled.div`
   position: absolute;
@@ -13,17 +13,17 @@ const Layer = styled.div`
     border: ${props => !props.clicked && "thin solid plum"};
   }
   border: ${props => props.clicked && "medium solid blueviolet"};
-`;
+`
 
 export const LayerItem = props => {
-  const [clicked, setClick] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const id = useContext(IdContext);
-  const fileName = useContext(fileNameContext);
+  const [clicked, setClick] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const id = useContext(IdContext)
+  const fileName = useContext(fileNameContext)
 
   const updateRegions = async id => {
-    setLoading(true);
+    setLoading(true)
     // クリックごとに座標データを送信
 
     const res = await fetch("http://localhost:3333/update", {
@@ -42,26 +42,26 @@ export const LayerItem = props => {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
 
     if (res.ok) {
-      setLoading(false);
-      setClick(!clicked);
+      setLoading(false)
+      setClick(!clicked)
     } else {
-      setError(true);
+      setError(true)
     }
-    console.log("クリック情報をサーバーにおくったよ");
-  };
+    console.log("クリック情報をサーバーにおくったよ")
+  }
 
   return (
     <Layer
       onClick={() => {
-        updateRegions(id);
+        updateRegions(id)
       }}
       clicked={clicked}
       left={props.left}
       top={props.top}
       length={props.length}
     />
-  );
-};
+  )
+}
