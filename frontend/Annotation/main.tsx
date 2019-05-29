@@ -16,7 +16,7 @@ const LayerWrapper = styled.div`
   left: 0;
 `
 
-export const Annotation = props => {
+export const Main = props => {
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState(0)
   const [length, setLength] = useState(1)

@@ -15,21 +15,17 @@ export const LayerList = props => {
   const [hwList, setHWList] = useState([])
   const { h, w, l } = props
 
-  const update = () => {
+  // create height and width list
+  useEffect(() => {
     if (h <= 0 || w <= 0) return
 
     const hNum = Math.ceil(h / l),
       wNum = Math.ceil(w / l)
 
-    const tmpHList = new Array<number>(hNum).fill(0).map((_, i) => i * l)
-    const tmpWList = new Array<number>(wNum).fill(0).map((_, i) => i * l)
-    const tmphwList = tmpHList.map(x => tmpWList.map(y => [x, y])).flat()
+    const hList = new Array<number>(hNum).fill(0).map((_, i) => i * l)
+    const wList = new Array<number>(wNum).fill(0).map((_, i) => i * l)
 
-    setHWList(tmphwList)
-  }
-
-  useEffect(() => {
-    update()
+    setHWList(hList.map(x => wList.map(y => [x, y])).flat())
   }, [h])
 
   const layerList = hwList.map(hw => {

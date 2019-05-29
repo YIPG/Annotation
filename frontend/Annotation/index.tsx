@@ -1,8 +1,6 @@
 import React, { useState, useEffect, createContext } from "react"
 import styled from "styled-components"
-import { Annotation } from "./annotation"
-import { string } from "prop-types"
-import { create } from "domain"
+import { Main } from "./main"
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +19,7 @@ const Button = styled.button`
 export const IdContext = createContext(null)
 export const fileNameContext = createContext(null)
 
-export const App = ({ match }) => {
+export const Annotation = ({ match }) => {
   const [index, setIndex] = useState(0)
   const [data, setData] = useState(null)
   const [fetchSuccess, setFetchSuccess] = useState(false)
@@ -53,10 +51,8 @@ export const App = ({ match }) => {
       <h1>Select all squares with {data.task}</h1>
       <IdContext.Provider value={match.params.id}>
         <fileNameContext.Provider value={data.data[index].originalname}>
-          <Annotation
+          <Main
             column={data.divide}
-            // FIX ME
-            // FOR DEPLOY, DONT USE LOCALHOST
             src={"http://localhost:3333/uploads/" + data.data[index].filename}
             name={data.data[index].filename}
           />

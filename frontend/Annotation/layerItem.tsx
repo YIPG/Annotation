@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import styled from "styled-components"
-import { IdContext, fileNameContext } from "./app"
+import { IdContext, fileNameContext } from "./index"
 
 const Layer = styled.div`
   position: absolute;
@@ -50,7 +50,6 @@ export const LayerItem = props => {
     } else {
       setError(true)
     }
-    console.log("クリック情報をサーバーにおくったよ")
   }
 
   return (
