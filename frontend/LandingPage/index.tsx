@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 5rem;
+  margin: 3rem;
 `
 
 const OptionWrapper = styled(Link)`
@@ -23,9 +23,11 @@ const OptionWrapper = styled(Link)`
 
 export const LP = () => {
   return (
-    <Wrapper>
-      <OptionWrapper to="/admin">Admin</OptionWrapper>
-      <OptionWrapper to="/upload">Task</OptionWrapper>
-    </Wrapper>
+    <React.Fragment>
+      <Wrapper>
+        <OptionWrapper to="/admin">Admin</OptionWrapper>
+        <OptionWrapper to="/upload">Task</OptionWrapper>
+      </Wrapper>
+    </React.Fragment>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react"
+import React, { useCallback, useState, useEffect, Fragment } from "react"
 import { useDropzone } from "react-dropzone"
 import styled from "styled-components"
 import { Redirect } from "react-router-dom"
@@ -8,7 +8,7 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
+  margin-top: 3rem;
 `
 
 const getColor = props => {
@@ -162,7 +162,7 @@ export const Upload = () => {
   if (successfulUploaded) return <Redirect to={"tasks/" + id} />
 
   return (
-    <div>
+    <Fragment>
       <FormWrapper>
         <label>
           Annotation Label
@@ -199,7 +199,6 @@ export const Upload = () => {
           送信する
         </Button>
       </ButtonContainer>
-      <a href="http://localhost:1234/admin">管理画面へ</a>
-    </div>
+    </Fragment>
   )
 }
