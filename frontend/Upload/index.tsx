@@ -8,7 +8,33 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3rem;
+  margin-top: 2rem;
+`
+
+const Form = styled.input`
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+  color: #606266;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  :hover {
+    border-color: #c0c4cc;
+  }
+  :focus {
+    outline: none;
+    border-color: #409eff;
+  }
+  ::placeholder {
+    color: #c0c4cc;
+  }
 `
 
 const getColor = props => {
@@ -164,29 +190,25 @@ export const Upload = () => {
   return (
     <Fragment>
       <FormWrapper>
-        <label>
-          Annotation Label
-          <input
-            type="text"
-            value={name}
-            onChange={e => setName(e.target.value)}
-          />
-        </label>
-        <label>
-          Vertical Division
-          <input
-            type="number"
-            min="1"
-            value={columns}
-            onChange={e => setColumns(e.target.value)}
-          />
-        </label>
+        <Form
+          placeholder="Label"
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+        <Form
+          placeholder="Vertical Division"
+          type="number"
+          min="1"
+          value={columns}
+          onChange={e => setColumns(e.target.value)}
+        />
       </FormWrapper>
       <Container
         {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
       >
         <input {...getInputProps()} />
-        <p>Drag and drop some files here, or click to select files</p>
+        <p>Drag and drop images(jpg/png) here, or click to select.</p>
       </Container>
       <ThumbsContainer>{thumbs}</ThumbsContainer>
       <ButtonContainer>

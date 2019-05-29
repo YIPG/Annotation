@@ -19,6 +19,10 @@ const OptionWrapper = styled(Link)`
   align-items: center;
   font-size: 3rem;
   text-decoration: none;
+  transition: 0.1s;
+  :hover {
+    color: #409eff;
+  }
 `
 
 export const LP = () => {

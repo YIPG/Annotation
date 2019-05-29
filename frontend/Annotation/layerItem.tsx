@@ -19,7 +19,7 @@ const Layer = styled.div.attrs(({ top, left, length }) => ({
 `
 
 export const LayerItem = props => {
-  const [clicked, setClick] = useState(false)
+  const [clicked, setClick] = useState(props.clicked)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const id = useContext(IdContext)
@@ -29,6 +29,7 @@ export const LayerItem = props => {
     setLoading(true)
     // クリックごとに座標データを送信
 
+    console.log(clicked ? "今から削除するよ" : "追加するよ")
     const res = await fetch("http://localhost:3333/update", {
       method: "POST",
       body: JSON.stringify({

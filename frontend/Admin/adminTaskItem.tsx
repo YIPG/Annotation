@@ -19,8 +19,18 @@ const TaskWrapper = styled.h3`
   margin-right: auto;
 `
 
-const AWrapper = styled.a`
-  margin-left: 10px;
+const DownloadButton = styled(Button)`
+  margin-left: 1rem;
+`
+
+const Link = styled.a`
+  color: #303133;
+  text-decoration: none;
+  text-decoration-line: underline;
+  transition: 0.1s;
+  :hover {
+    color: #409eff;
+  }
 `
 
 export const TaskItem = props => {
@@ -33,21 +43,22 @@ export const TaskItem = props => {
     <Wrapper>
       <TaskWrapper>
         タスク名:{" "}
-        <a href={"http://localhost:1234/tasks/" + props.data._id}>
+        <Link href={"http://localhost:1234/tasks/" + props.data._id}>
           {props.data.task}
-        </a>
+        </Link>
+        {" - "}縦分割数: {props.data.divide}
       </TaskWrapper>
       <h3>
         進捗:
         {getPercentage(clickedImages.length, allImages.length)}% (
         {clickedImages.length}枚/{allImages.length}枚中)
       </h3>
-      <AWrapper
+      <a
         href={"http://localhost:3333/getResult?id=" + props.data._id}
         download={props.data.task + ".json"}
       >
-        <Button>進捗ダウンロード(JSON)</Button>
-      </AWrapper>
+        <DownloadButton>進捗ダウンロード(JSON)</DownloadButton>
+      </a>
     </Wrapper>
   )
 }

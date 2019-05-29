@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import { LayerItem } from "./layerItem"
+import { clickContext } from "./index"
 
 const LayerWrapper = styled.div`
   position: absolute;
@@ -14,10 +15,13 @@ const LayerWrapper = styled.div`
 export const LayerList = props => {
   const [hwList, setHWList] = useState([])
   const { h, w, l } = props
+  const regions = useContext(clickContext)
 
   // create height and width list
   useEffect(() => {
     if (h <= 0 || w <= 0) return
+
+    console.log(regions)
 
     const hNum = Math.ceil(h / l),
       wNum = Math.ceil(w / l)
@@ -31,7 +35,12 @@ export const LayerList = props => {
   const layerList = hwList.map(hw => {
     return (
       <li key={String(hw[0]) + String(hw[1])}>
-        <LayerItem top={hw[0]} left={hw[1]} length={l} />
+        <LayerItem
+          clicked={regions.some(i => i.y === hw[0] && i.x === hw[1])}
+          top={hw[0]}
+          left={hw[1]}
+          length={l}
+        />
       </li>
     )
   })

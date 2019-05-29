@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 10rem;
 `
 
 export const Admin = () => {
@@ -22,7 +23,8 @@ export const Admin = () => {
     fetchAll()
   }, [])
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) return <div />
+
   return (
     <Wrapper>
       <h1>タスク数: {data.length}</h1>
