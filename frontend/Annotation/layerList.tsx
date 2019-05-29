@@ -21,26 +21,11 @@ export const LayerList = props => {
     const hNum = Math.ceil(h / l),
       wNum = Math.ceil(w / l)
 
-    console.log({ hNum, l, wNum })
-    const tmpHList = new Array(hNum).fill(0).map((_, i) => i * l)
-    const tmpWList = new Array(wNum).fill(0).map((_, i) => i * l)
+    const tmpHList = new Array<number>(hNum).fill(0).map((_, i) => i * l)
+    const tmpWList = new Array<number>(wNum).fill(0).map((_, i) => i * l)
+    const tmphwList = tmpHList.map(x => tmpWList.map(y => [x, y])).flat()
 
-    // FIX ME:
-    // NOT SOPHISTICATED
-    const tmphwList = []
-
-    if (tmpHList.length !== 0 && tmpWList.length !== 0) {
-      tmpHList.forEach(height => {
-        tmpWList.forEach(width => {
-          tmphwList.push({
-            height: height,
-            width: width
-          })
-        })
-      })
-
-      setHWList(tmphwList)
-    }
+    setHWList(tmphwList)
   }
 
   useEffect(() => {
@@ -49,8 +34,8 @@ export const LayerList = props => {
 
   const layerList = hwList.map(hw => {
     return (
-      <li key={String(hw.height) + String(hw.width)}>
-        <LayerItem top={hw.height} left={hw.width} length={l} />
+      <li key={String(hw[0]) + String(hw[1])}>
+        <LayerItem top={hw[0]} left={hw[1]} length={l} />
       </li>
     )
   })
