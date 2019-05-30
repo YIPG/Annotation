@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react"
-import styled from "styled-components"
-import { IdContext, fileNameContext } from "./index"
+import React, { useState, useEffect, useContext, createRef } from "react";
+import styled from "styled-components";
+import { IdContext, fileNameContext } from "./index";
 
 const Layer = styled.div.attrs(({ top, left, length }) => ({
   style: {
@@ -16,20 +16,20 @@ const Layer = styled.div.attrs(({ top, left, length }) => ({
     border: ${props => !props.clicked && "thin solid plum"};
   }
   border: ${props => props.clicked && "medium solid blueviolet"};
-`
+`;
 
 export const LayerItem = props => {
-  const [clicked, setClick] = useState(props.clicked)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const id = useContext(IdContext)
-  const fileName = useContext(fileNameContext)
+  const [clicked, setClick] = useState(props.clicked);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const id = useContext(IdContext);
+  const fileName = useContext(fileNameContext);
 
   const updateRegions = async id => {
-    setLoading(true)
+    setLoading(true);
     // クリックごとに座標データを送信
 
-    console.log(clicked ? "今から削除するよ" : "追加するよ")
+    console.log(clicked ? "今から削除するよ" : "追加するよ");
     const res = await fetch("http://localhost:3333/update", {
       method: "POST",
       body: JSON.stringify({
@@ -46,25 +46,32 @@ export const LayerItem = props => {
       headers: {
         "Content-Type": "application/json"
       }
-    })
-
+    });
     if (res.ok) {
-      setLoading(false)
-      setClick(!clicked)
+      setLoading(false);
+      setClick(!clicked);
     } else {
-      setError(true)
+      setError(true);
     }
-  }
+  };
+
+  // TODO: MULTI OS
+  // Macのみキー操作対応
+  const onKeyCodeOperation = keyCode => {
+    keyCode === 13 && updateRegions(id);
+  };
 
   return (
     <Layer
       onClick={() => {
-        updateRegions(id)
+        updateRegions(id);
       }}
+      tabIndex={0}
+      onKeyDown={target => onKeyCodeOperation(target.keyCode)}
       clicked={clicked}
       left={props.left}
       top={props.top}
       length={props.length}
     />
-  )
-}
+  );
+};
