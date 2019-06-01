@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, createRef } from "react";
 import styled from "styled-components";
 import { IdContext, fileNameContext } from "./index";
+import { PromiseProvider } from "mongoose";
 
 const Layer = styled.div.attrs(({ top, left, length }) => ({
   style: {
@@ -24,6 +25,12 @@ export const LayerItem = props => {
   const [error, setError] = useState(false);
   const id = useContext(IdContext);
   const fileName = useContext(fileNameContext);
+
+  let layerRef: React.RefObject<HTMLInputElement> = createRef();
+
+  useEffect(() => {
+    props.focus && layerRef.current.focus();
+  }, [props.focus]);
 
   const updateRegions = async id => {
     setLoading(true);
@@ -56,18 +63,22 @@ export const LayerItem = props => {
   };
 
   // TODO: MULTI OS
-  // Macのみキー操作対応
-  const onKeyCodeOperation = keyCode => {
-    keyCode === 13 && updateRegions(id);
+  // Macのみキー操作対応確認
+  const handleKeyDown = target => {
+    const { key } = target;
+    key === "Enter" && updateRegions(id);
+    key === "ArrowRight" && props.rightArrowClick();
+    key === "ArrowLeft" && props.leftArrowClick();
   };
 
   return (
     <Layer
+      ref={layerRef}
       onClick={() => {
         updateRegions(id);
       }}
       tabIndex={0}
-      onKeyDown={target => onKeyCodeOperation(target.keyCode)}
+      onKeyDown={target => handleKeyDown(target)}
       clicked={clicked}
       left={props.left}
       top={props.top}

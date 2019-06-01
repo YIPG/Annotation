@@ -21,19 +21,21 @@ interface IProps {
 
 interface IState {
   hwList: any;
+  focusPoint: [number, number];
 }
 
 export class LayerList extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      hwList: null
+      hwList: null,
+      focusPoint: [0, 0]
     };
   }
 
   componentDidUpdate(prevProps) {
     const { h, w, l } = this.props;
-    if (prevProps.h !== h && h > 0 && w > 0) {
+    if (prevProps.h !== h) {
       const hNum = Math.ceil(h / l),
         wNum = Math.ceil(w / l);
 
@@ -46,8 +48,26 @@ export class LayerList extends Component<IProps, IState> {
     }
   }
 
+  rightArrowClick() {
+    const { h, w, l } = this.props;
+    const { focusPoint } = this.state;
+    focusPoint[1] < w &&
+      this.setState({
+        focusPoint: [focusPoint[0], focusPoint[1] + l]
+      });
+  }
+
+  leftArrowClick() {
+    const { h, w, l } = this.props;
+    const { focusPoint } = this.state;
+    focusPoint[1] > 0 &&
+      this.setState({
+        focusPoint: [focusPoint[0], focusPoint[1] - l]
+      });
+  }
+
   render() {
-    const { hwList } = this.state;
+    const { hwList, focusPoint } = this.state;
     const { h, w, l, regions } = this.props;
     const layerList =
       regions &&
@@ -55,6 +75,9 @@ export class LayerList extends Component<IProps, IState> {
       hwList.map(hw => (
         <li key={String(hw[0]) + String(hw[1])}>
           <LayerItem
+            rightArrowClick={this.rightArrowClick.bind(this)}
+            leftArrowClick={this.leftArrowClick.bind(this)}
+            focus={focusPoint[0] === hw[0] && focusPoint[1] === hw[1]}
             clicked={this.props.regions.some(
               i => i.y === hw[0] && i.x === hw[1]
             )}
@@ -78,6 +101,7 @@ export class LayerList extends Component<IProps, IState> {
 //   const [hwList, setHWList] = useState([]);
 //   const { h, w, l } = props;
 //   const regions = useContext(clickContext);
+//   const [focus, setFocus] = useState([0, 0]);
 
 //   // create height and width list
 //   useEffect(() => {
@@ -97,9 +121,11 @@ export class LayerList extends Component<IProps, IState> {
 //   }, [h]);
 
 //   const layerList = hwList.map(hw => {
+//     console.log({ hw, focus });
 //     return (
 //       <li key={String(hw[0]) + String(hw[1])}>
 //         <LayerItem
+//           focus={focus[0] === hw[0] && focus[1] === hw[1]}
 //           clicked={regions.some(i => i.y === hw[0] && i.x === hw[1])}
 //           top={hw[0]}
 //           left={hw[1]}
