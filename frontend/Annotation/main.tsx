@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { LayerList } from "./layerList";
+import { clickContext } from "./index";
 
 const ImgWrapper = styled.section`
   position: relative;
@@ -27,7 +28,11 @@ export const Main = props => {
           setLength(height / props.column);
         }}
       />
-      <LayerList h={height} w={width} l={length} />
+      <clickContext.Consumer>
+        {regions => (
+          <LayerList regions={regions} h={height} w={width} l={length} />
+        )}
+      </clickContext.Consumer>
     </ImgWrapper>
   );
 };
