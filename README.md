@@ -27,6 +27,7 @@ yarn start
 npm run start
 ```
 
+## Build
 
 In order to build the app, run below commands.
 
