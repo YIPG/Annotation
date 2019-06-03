@@ -17,7 +17,7 @@ npm intasll
 ```
 
 ## Quick Start
-First you need to launch the server.
+
 ### Yarn
 ```
 yarn start
