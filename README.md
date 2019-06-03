@@ -1,16 +1,11 @@
 # Annotation App
 
-<img src="https://user-images.githubusercontent.com/19145527/57267784-4082fe80-70bc-11e9-9c4b-c9c3ac55d46f.gif" width="500px" />
+<img src="https://user-images.githubusercontent.com/19145527/58789987-62739080-862a-11e9-8d16-ac80e3e29cc8.gif" width="500px" />
 
 This is the web app for annotation tasks.
 
-## Caution
-This project is on the way.
-You can just upload tasks and view images and annotate each image.  
-** But you cannot save annotation result to DB yet**
-
 ## Installation
-You will need to prepare node(8.10.0 or later) and MongoDB on local.
+You will need to prepare node(8.10.0 or later) and MongoDB on local. (You can install MongoDB [here](https://docs.mongodb.com/manual/installation/))
 
 ### Yarn
 ```
@@ -25,23 +20,13 @@ npm intasll
 First you need to launch the server.
 ### Yarn
 ```
-yarn start-server
+yarn start
 ```
 ### npm
 ```
-npm run start-server
+npm run start
 ```
 
-Then, launch the frontend.
-
-### Yarn
-```
-yarn dev
-```
-### npm
-```
-npm run dev
-```
 
 In order to build the app, run below commands.
 
@@ -54,7 +39,8 @@ yarn build
 npm run build
 ```
 
-## Tasks
-You can see the images you uploaded in `public/images`.
+# Progress
 
-You can share the tasks via URL. `/tasks/TASK_ID`
+You can get the progress.json via Admin Page.
+
+<img src="https://user-images.githubusercontent.com/19145527/58790531-8683a180-862b-11e9-8903-7ef4c9256001.png" width="500px" />
