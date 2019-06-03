@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, Component } from "react";
-import styled from "styled-components";
-import { LayerItem } from "./layerItem";
-import { clickContext } from "./index";
+import React, { useState, useEffect, useContext, Component } from "react"
+import styled from "styled-components"
+import { LayerItem } from "./layerItem"
+import { clickContext } from "./index"
 
 const LayerWrapper = styled.div`
   position: absolute;
@@ -10,74 +10,101 @@ const LayerWrapper = styled.div`
   left: 0;
   height: ${props => props.h};
   width: ${props => props.w};
-`;
+`
 
 interface IProps {
-  h: number;
-  w: number;
-  l: number;
-  regions: any;
+  h: number
+  w: number
+  l: number
+  regions: any
+  nextImage: any
+  preImage: any
 }
 
 interface IState {
-  hwList: any;
-  focusPoint: [number, number];
+  hwList: any
+  focusIndex: number
 }
 
 export class LayerList extends Component<IProps, IState> {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       hwList: null,
-      focusPoint: [0, 0]
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    const { h, w, l } = this.props;
-    if (prevProps.h !== h) {
-      const hNum = Math.ceil(h / l),
-        wNum = Math.ceil(w / l);
-
-      const hList = new Array<number>(hNum).fill(0).map((_, i) => i * l);
-      const wList = new Array<number>(wNum).fill(0).map((_, i) => i * l);
-
-      this.setState({
-        hwList: hList.map(x => wList.map(y => [x, y])).flat()
-      });
+      focusIndex: 0
     }
   }
 
-  rightArrowClick() {
-    const { h, w, l } = this.props;
-    const { focusPoint } = this.state;
-    focusPoint[1] < w &&
+  componentDidUpdate(prevProps) {
+    const { h, w, l } = this.props
+    if (prevProps.h !== h) {
+      const hNum = Math.ceil(h / l),
+        wNum = Math.ceil(w / l)
+
+      const hList = new Array<number>(hNum).fill(0).map((_, i) => i * l)
+      const wList = new Array<number>(wNum).fill(0).map((_, i) => i * l)
+
       this.setState({
-        focusPoint: [focusPoint[0], focusPoint[1] + l]
-      });
+        hwList: hList.map(x => wList.map(y => [x, y])).flat(),
+        focusIndex: 0
+      })
+    }
   }
 
-  leftArrowClick() {
-    const { h, w, l } = this.props;
-    const { focusPoint } = this.state;
-    focusPoint[1] > 0 &&
+  setFocusIndex(index) {
+    this.setState({
+      focusIndex: index
+    })
+  }
+
+  // Keyboard Shortcut
+  handleKeyDown(target) {
+    const { key, altKey } = target
+    const { focusIndex, hwList } = this.state
+    const wNum = Math.ceil(this.props.w / this.props.l)
+
+    key === "ArrowRight" &&
+      (altKey
+        ? this.props.nextImage()
+        : focusIndex < hwList.length - 1 &&
+          this.setState({
+            focusIndex: focusIndex + 1
+          }))
+    key === "ArrowLeft" &&
+      (altKey
+        ? this.props.preImage()
+        : focusIndex > 0 &&
+          this.setState({
+            focusIndex: focusIndex - 1
+          }))
+    key === "ArrowUp" &&
+      focusIndex > wNum - 1 &&
       this.setState({
-        focusPoint: [focusPoint[0], focusPoint[1] - l]
-      });
+        focusIndex: focusIndex - wNum
+      })
+    key === "ArrowDown" &&
+      focusIndex < hwList.length - wNum &&
+      this.setState({
+        focusIndex: focusIndex + wNum
+      })
+
+    target.ctrlKey && key === "ArrowRight" && console.log("次画像")
+    target.ctrlKey && key === "ArrowLeft" && this.props.preImage()
   }
 
   render() {
-    const { hwList, focusPoint } = this.state;
-    const { h, w, l, regions } = this.props;
+    const { hwList, focusIndex } = this.state
+    const { h, w, l, regions } = this.props
     const layerList =
       regions &&
       hwList &&
-      hwList.map(hw => (
+      hwList.map((hw, index) => (
         <li key={String(hw[0]) + String(hw[1])}>
           <LayerItem
-            rightArrowClick={this.rightArrowClick.bind(this)}
-            leftArrowClick={this.leftArrowClick.bind(this)}
-            focus={focusPoint[0] === hw[0] && focusPoint[1] === hw[1]}
+            handleKeyDown={this.handleKeyDown.bind(this)}
+            index={index}
+            focusIndex={focusIndex}
+            setFocusIndex={this.setFocusIndex.bind(this)}
             clicked={this.props.regions.some(
               i => i.y === hw[0] && i.x === hw[1]
             )}
@@ -86,12 +113,12 @@ export class LayerList extends Component<IProps, IState> {
             length={l}
           />
         </li>
-      ));
+      ))
     return (
       <LayerWrapper h={h} w={w}>
         {layerList}
       </LayerWrapper>
-    );
+    )
   }
 }
 

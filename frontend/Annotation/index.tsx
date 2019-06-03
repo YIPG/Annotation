@@ -4,7 +4,8 @@ import { Main } from "./main"
 import { Button } from "../util/Button"
 
 const Wrapper = styled.div`
-  margin-top: 1rem;
+  margin: 1rem 0 0 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,6 +41,17 @@ export const Annotation = ({ match }) => {
     fetchData(match.params.id)
   }, [match.params.id, index])
 
+  const preImage = () => {
+    console.log("前の画像へ", index)
+    index !== 0 && setIndex(index - 1)
+  }
+
+  const nextImage = () => {
+    console.log("次の画像へ", index)
+
+    index !== data.data.length - 1 && setIndex(index + 1)
+  }
+
   if (!fetchSuccess)
     return (
       <Wrapper>
@@ -55,7 +67,9 @@ export const Annotation = ({ match }) => {
             <Main
               column={data.divide}
               src={"http://localhost:3333/uploads/" + data.data[index].filename}
-              name={data.data[index].filename}
+              name={data.data[index].originalname}
+              nextImage={nextImage}
+              preImage={preImage}
             />
           </clickContext.Provider>
         </fileNameContext.Provider>
