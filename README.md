@@ -6,6 +6,7 @@ This is the web app for annotation tasks.
 
 ## Installation
 You will need to prepare node(8.10.0 or later) and MongoDB on local. (You can install MongoDB [here](https://docs.mongodb.com/manual/installation/))
+Then, clone this repository.
 
 ### Yarn
 ```
