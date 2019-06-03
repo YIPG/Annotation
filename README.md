@@ -1,6 +1,6 @@
 # Annotation App
 
-<img src="https://user-images.githubusercontent.com/19145527/58789987-62739080-862a-11e9-8d16-ac80e3e29cc8.gif" width="500px" />
+<img src="https://user-images.githubusercontent.com/19145527/58791295-e4fd4f80-862c-11e9-9dc8-2c77aa45ddbf.gif" width="600px" />
 
 This is the web app for annotation tasks.
 
