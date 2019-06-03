@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 10rem;
+  padding-top: 3rem;
 `
 
 export const Admin = () => {

@@ -12,8 +12,10 @@ const HeaderWrapper = styled.header`
   height: 3rem;
   border-bottom: 1px solid #eee;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
-  position: static;
+  position: fixed;
+  background-color: white;
   top: 0;
+  z-index: 1;
 `
 
 const HeaderText = styled(Link)`

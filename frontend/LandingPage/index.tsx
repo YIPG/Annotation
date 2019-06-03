@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 3rem;
+  padding-top: 3rem;
 `
 
 const OptionWrapper = styled(Link)`

@@ -4,6 +4,11 @@ import styled from "styled-components"
 import { Redirect } from "react-router-dom"
 import { Button } from "../util/Button"
 
+const Wrapper = styled.div`
+  padding-top: 3rem;
+  padding-bottom: 10rem;
+`
+
 const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -188,7 +193,7 @@ export const Upload = () => {
   if (successfulUploaded) return <Redirect to={"tasks/" + id} />
 
   return (
-    <Fragment>
+    <Wrapper>
       <FormWrapper>
         <Form
           placeholder="Label"
@@ -221,6 +226,6 @@ export const Upload = () => {
           送信する
         </Button>
       </ButtonContainer>
-    </Fragment>
+    </Wrapper>
   )
 }

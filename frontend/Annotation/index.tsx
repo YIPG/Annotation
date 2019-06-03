@@ -5,6 +5,7 @@ import { Button } from "../util/Button"
 
 const Wrapper = styled.div`
   margin: 1rem 0 0 0;
+  padding-top: 3rem;
   width: 100%;
   display: flex;
   flex-direction: column;

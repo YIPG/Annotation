@@ -29,26 +29,36 @@ interface IState {
 export class LayerList extends Component<IProps, IState> {
   constructor(props) {
     super(props)
+
     this.state = {
       hwList: null,
       focusIndex: 0
     }
   }
 
+  componentDidMount() {
+    this.initLayer()
+  }
+
   componentDidUpdate(prevProps) {
-    const { h, w, l } = this.props
-    if (prevProps.h !== h) {
-      const hNum = Math.ceil(h / l),
-        wNum = Math.ceil(w / l)
-
-      const hList = new Array<number>(hNum).fill(0).map((_, i) => i * l)
-      const wList = new Array<number>(wNum).fill(0).map((_, i) => i * l)
-
-      this.setState({
-        hwList: hList.map(x => wList.map(y => [x, y])).flat(),
-        focusIndex: 0
-      })
+    if (prevProps.h !== this.props.h) {
+      this.initLayer()
     }
+  }
+
+  initLayer() {
+    const { h, w, l } = this.props
+
+    const hNum = Math.ceil(h / l),
+      wNum = Math.ceil(w / l)
+
+    const hList = new Array<number>(hNum).fill(0).map((_, i) => i * l)
+    const wList = new Array<number>(wNum).fill(0).map((_, i) => i * l)
+
+    this.setState({
+      hwList: hList.map(x => wList.map(y => [x, y])).flat(),
+      focusIndex: 0
+    })
   }
 
   setFocusIndex(index) {
