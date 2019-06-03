@@ -39,8 +39,21 @@ yarn build
 npm run build
 ```
 
-# Progress
+## Feature
+
+### Progress
 
 You can get the progress.json via Admin Page.
 
 <img src="https://user-images.githubusercontent.com/19145527/58790531-8683a180-862b-11e9-8903-7ef4c9256001.png" width="500px" />
+
+### Keyboard Operation
+
+In the task page, you can move focus via keyboard.
+
+- Move right -  :arrow_right: 
+- Move left -  :arrow_left: 
+- Move top - :arrow_up: 
+- Move down -  :arrow_down: 
+- Next image - ⌥ + :arrow_right:
+- Prev Image - ⌥ + :arrow_left: 
