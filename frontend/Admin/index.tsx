@@ -17,7 +17,6 @@ export const Admin = () => {
     const fetchAll = async () => {
       const res = await fetch("http://localhost:3333/all", {})
       const result = await res.json()
-      console.log(result)
       setData(result)
       setLoading(false)
     }

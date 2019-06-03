@@ -34,7 +34,6 @@ const Link = styled.a`
 `
 
 export const TaskItem = props => {
-  console.log(props.data)
   const clickedImages = props.data.images.filter(
     item => item.regions.length > 0
   )

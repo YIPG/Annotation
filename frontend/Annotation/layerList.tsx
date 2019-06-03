@@ -97,9 +97,6 @@ export class LayerList extends Component<IProps, IState> {
       this.setState({
         focusIndex: focusIndex + wNum
       })
-
-    target.ctrlKey && key === "ArrowRight" && console.log("次画像")
-    target.ctrlKey && key === "ArrowLeft" && this.props.preImage()
   }
 
   render() {
@@ -131,50 +128,3 @@ export class LayerList extends Component<IProps, IState> {
     )
   }
 }
-
-// Ref使用のためClassに書き換え
-
-// export const LayerList = props => {
-//   const [hwList, setHWList] = useState([]);
-//   const { h, w, l } = props;
-//   const regions = useContext(clickContext);
-//   const [focus, setFocus] = useState([0, 0]);
-
-//   // create height and width list
-//   useEffect(() => {
-//     console.log(regions);
-
-//     if (h <= 0 || w <= 0) return;
-
-//     // console.log(regions)
-
-//     const hNum = Math.ceil(h / l),
-//       wNum = Math.ceil(w / l);
-
-//     const hList = new Array<number>(hNum).fill(0).map((_, i) => i * l);
-//     const wList = new Array<number>(wNum).fill(0).map((_, i) => i * l);
-
-//     setHWList(hList.map(x => wList.map(y => [x, y])).flat());
-//   }, [h]);
-
-//   const layerList = hwList.map(hw => {
-//     console.log({ hw, focus });
-//     return (
-//       <li key={String(hw[0]) + String(hw[1])}>
-//         <LayerItem
-//           focus={focus[0] === hw[0] && focus[1] === hw[1]}
-//           clicked={regions.some(i => i.y === hw[0] && i.x === hw[1])}
-//           top={hw[0]}
-//           left={hw[1]}
-//           length={l}
-//         />
-//       </li>
-//     );
-//   });
-
-//   return (
-//     <LayerWrapper h={h} w={w}>
-//       {layerList}
-//     </LayerWrapper>
-//   );
-// };

@@ -34,7 +34,6 @@ export const Annotation = ({ match }) => {
     const fetchData = async id => {
       const res = await fetch("http://localhost:3333/db?id=" + id)
       const result = await res.json()
-      console.log({ result })
       setData(result)
       setFetchSuccess(true)
     }
@@ -43,13 +42,10 @@ export const Annotation = ({ match }) => {
   }, [match.params.id, index])
 
   const preImage = () => {
-    console.log("前の画像へ", index)
     index !== 0 && setIndex(index - 1)
   }
 
   const nextImage = () => {
-    console.log("次の画像へ", index)
-
     index !== data.data.length - 1 && setIndex(index + 1)
   }
 

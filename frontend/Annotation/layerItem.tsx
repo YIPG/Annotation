@@ -39,7 +39,6 @@ export const LayerItem = props => {
     setLoading(true)
     // クリックごとに座標データを送信
 
-    console.log(clicked ? "今から削除するよ" : "追加するよ")
     const res = await fetch("http://localhost:3333/update", {
       method: "POST",
       body: JSON.stringify({
@@ -64,9 +63,6 @@ export const LayerItem = props => {
       setError(true)
     }
   }
-
-  // TODO: MULTI OS
-  // Macのみキー操作対応確認
 
   return (
     <Layer

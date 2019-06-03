@@ -48,8 +48,6 @@ const Task = mongoose.model<ITaskSchema>("Task", taskSchema)
 */
 
 app.post("/upload", upload.array("file"), async (req, res) => {
-  // console.log(req.files)
-  // console.log(req.body)
   const images = req.files.map(f =>
     Object.assign(
       {},
@@ -59,7 +57,6 @@ app.post("/upload", upload.array("file"), async (req, res) => {
       }
     )
   )
-  console.log(images)
   const task = new Task({
     task: req.body.label,
     divide: req.body.column,
@@ -78,24 +75,11 @@ app.get("/db", async (req, res) => {
 })
 
 app.post("/update", async (req, res) => {
-  // console.log(req.body.add);
   try {
     const targetTask = await Task.findById(req.body.id)
     const targetIndex = targetTask.images.findIndex(
       item => item.pathname === req.body.fileName
     )
-    // const targetRegionIndex = targetTask.images[targetIndex].regions.findIndex(
-    //   req.body.region
-    // );
-    console.log(req.body.add ? "今から追加するよん" : "今から削除するよん")
-
-    // if (!req.body.add) {
-    //   console.log(
-    //     targetTask.images[targetIndex].regions.filter(
-    //       item => !isEqualPoint(item, req.body.region)
-    //     )
-    //   );
-    // }
 
     if (targetIndex !== -1) {
       req.body.add
@@ -109,7 +93,6 @@ app.post("/update", async (req, res) => {
     await targetTask.markModified("images")
     await targetTask.save()
 
-    console.log("targettaskを保存した")
     res.status(200).send("success")
   } catch (err) {
     console.log(err)

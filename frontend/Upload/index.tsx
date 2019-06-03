@@ -125,17 +125,6 @@ export const Upload = () => {
         })
       )
     )
-    // const reader = new FileReader()
-
-    // reader.onabort = () => console.log("file reading was aborted")
-    // reader.onerror = () => console.log("file reading has failed")
-    // reader.onload = () => {
-    //   // Do whatever you want with the file contents
-    //   const binaryStr = reader.result
-    //   console.log(binaryStr)
-    // }
-
-    // acceptedFiles.forEach(file => reader.readAsBinaryString(file))
   }, [])
 
   const uploadFiles = useCallback(async () => {
@@ -143,18 +132,15 @@ export const Upload = () => {
       const response = await sendRequest(files)
       const dbId = await response.text()
       setId(dbId)
-      console.log(`${dbId}を保存しました`)
       setUploading(false)
       setSuccessfulUploaded(true)
     } catch (e) {
-      console.log(e)
       setUploading(false)
       setSuccessfulUploaded(false)
     }
   }, [files])
 
   const sendRequest = async files => {
-    console.log(`Now start to send server: Task: ${name}, Divide: ${columns}`)
     const formData = new FormData()
     files.forEach(file => {
       formData.append("file", file, file.name)
