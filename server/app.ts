@@ -117,12 +117,12 @@ app.post("/update", async (req, res) => {
   }
 })
 
-app.get("/progress", async (req, res) => {
+app.get("/all", async (req, res) => {
   const result = await Task.find()
   res.send(result)
 })
 
-app.get("/getResult", async (req, res) => {
+app.get("/progress", async (req, res) => {
   let target = await Task.findById(req.query.id)
   const result = {
     images: target.images,

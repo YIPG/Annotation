@@ -54,7 +54,7 @@ export const TaskItem = props => {
         {clickedImages.length}枚/{allImages.length}枚中)
       </h3>
       <a
-        href={"http://localhost:3333/getResult?id=" + props.data._id}
+        href={"http://localhost:3333/progress?id=" + props.data._id}
         download={props.data.task + ".json"}
       >
         <DownloadButton>進捗ダウンロード(JSON)</DownloadButton>
