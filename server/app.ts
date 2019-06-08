@@ -1,120 +1,18 @@
-import express from "express"
-import mongoose from "mongoose"
-import multer from "multer"
-import cors from "cors"
-import bodyParser from "body-parser"
-import { isEqualPoint } from "./util"
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import route from "./routes/route";
 
-const app = express()
-app.use(cors())
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-)
-app.use(bodyParser.json())
-app.use(express.static("public"))
-
-const upload = multer({ dest: `public/uploads/` })
-mongoose.connect("mongodb://127.0.0.1:27017/annotation", {
-  useNewUrlParser: true
-})
+const app = express();
+app.use(cors());
+app.use(express.static("public"));
 
 // Check DB Connection
-const db = mongoose.connection
-db.on("error", console.error.bind(console, "connection error:"))
-db.once("open", () => console.log("connection OK"))
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => console.log("connection OK"));
 
-// mongooseスキーマ
-const taskSchema = new mongoose.Schema({
-  task: String,
-  divide: Number,
-  images: [],
-  data: []
-})
+// Routing
+app.use("/", route);
 
-// TSスキーマ（findした際などに継承するため)
-interface ITaskSchema extends mongoose.Document {
-  task: String
-  divide: Number
-  images: { pathname: string; regions: any }[]
-  data: any[]
-}
-
-const Task = mongoose.model<ITaskSchema>("Task", taskSchema)
-
-/*
-以下ルーティング処理
-*/
-
-app.post("/upload", upload.array("file"), async (req, res) => {
-  const images = req.files.map(f =>
-    Object.assign(
-      {},
-      {
-        pathname: f.originalname,
-        regions: []
-      }
-    )
-  )
-  const task = new Task({
-    task: req.body.label,
-    divide: req.body.column,
-    data: req.files,
-    images: images
-  })
-
-  const result = await task.save()
-
-  res.send(result.id)
-})
-
-app.get("/db", async (req, res) => {
-  const targetTask = await Task.findById(req.query.id)
-  res.send(targetTask)
-})
-
-app.post("/update", async (req, res) => {
-  try {
-    const targetTask = await Task.findById(req.body.id)
-    const targetIndex = targetTask.images.findIndex(
-      item => item.pathname === req.body.fileName
-    )
-
-    if (targetIndex !== -1) {
-      req.body.add
-        ? targetTask.images[targetIndex].regions.push(req.body.region)
-        : (targetTask.images[targetIndex].regions = targetTask.images[
-            targetIndex
-          ].regions.filter(item => !isEqualPoint(item, req.body.region)))
-    }
-
-    console.log(targetTask.images[targetIndex].regions)
-    await targetTask.markModified("images")
-    await targetTask.save()
-
-    res.status(200).send("success")
-  } catch (err) {
-    console.log(err)
-    res.status(500).send(err)
-  }
-})
-
-app.get("/all", async (req, res) => {
-  const result = await Task.find()
-  res.send(result)
-})
-
-app.get("/progress", async (req, res) => {
-  let target = await Task.findById(req.query.id)
-  const result = {
-    images: target.images,
-    task: target.task,
-    divide: target.divide
-  }
-
-  res.attachment(`${target.task}.json`)
-  res.send(result)
-})
-
-app.listen(3333, () => console.log("working at 3333"))
+app.listen(3333, () => console.log("working at 3333"));
