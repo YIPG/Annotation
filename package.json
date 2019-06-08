@@ -10,15 +10,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@types/body-parser": "^1.17.0",
-    "@types/formidable": "^1.0.31",
-    "@types/mongoose": "^5.3.27",
-    "@types/mysql": "^2.15.5",
-    "@types/react": "^16.8.15",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-dropzone": "^4.2.2",
-    "@types/react-router": "^4.4.5",
-    "@types/react-router-dom": "^4.3.2",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "dropzone": "^5.5.1",
@@ -36,5 +27,17 @@
     "ts-node": "^8.0.3",
     "typescript": "^3.4.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/formidable": "^1.0.31",
+    "@types/mongoose": "^5.5.5",
+    "@types/mysql": "^2.15.6",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-dropzone": "^4.2.2",
+    "@types/react-router": "^5.0.1",
+    "@types/react-router-dom": "^4.3.3",
+    "enzyme": "^3.10.0",
+    "jest": "^24.8.0"
+  }
 }
