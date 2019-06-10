@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html -d build",
+    "test": "jest"
   },
   "name": "front",
   "version": "1.0.0",

@@ -1,0 +1,19 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t yuyaito3/testing-stage -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run yuyaito3/testing-stage yarn test --coverage
+
+after_success:
+  - docker build -t yuyaito3/annotation-client ./client
+  - docker build -t yuyaito3/annotation-nginx ./nginx
+  - docker build -t yuyaito3/annotation-server ./server
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push yuyaito3/annotation-client
+  - docker push yuyaito3/annotation-nginx
+  - docker push yuyaito3/annotation-server
