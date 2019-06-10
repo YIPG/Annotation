@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
-import styled from "styled-components"
-import { TaskList } from "./adminTaskList"
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { TaskList } from './adminTaskList'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const Admin = () => {
   const [data, setData] = useState(null)
   useEffect(() => {
     const fetchAll = async () => {
-      const res = await fetch("http://localhost:3333/all", {})
+      const res = await fetch('/api/all', {})
       const result = await res.json()
       setData(result)
       setLoading(false)

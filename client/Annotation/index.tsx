@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext } from "react"
-import styled from "styled-components"
-import { Main } from "./main"
-import { Button } from "../util/Button"
+import React, { useState, useEffect, createContext } from 'react'
+import styled from 'styled-components'
+import { Main } from './main'
+import { Button } from '../util/Button'
 
 const Wrapper = styled.div`
   margin: 1rem 0 0 0;
@@ -32,7 +32,7 @@ export const Annotation = ({ match }) => {
   useEffect(() => {
     // 画像データをフェッチ
     const fetchData = async id => {
-      const res = await fetch("http://localhost:3333/db?id=" + id)
+      const res = await fetch('/api/db?id=' + id)
       const result = await res.json()
       setData(result)
       setFetchSuccess(true)
@@ -63,7 +63,7 @@ export const Annotation = ({ match }) => {
           <clickContext.Provider value={data.images[index].regions}>
             <Main
               column={data.divide}
-              src={"http://localhost:3333/uploads/" + data.data[index].filename}
+              src={'/api/uploads/' + data.data[index].filename}
               name={data.data[index].originalname}
               nextImage={nextImage}
               preImage={preImage}

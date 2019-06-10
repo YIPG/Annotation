@@ -9,7 +9,7 @@ app.use(express.static('public'))
 
 // Check DB Connection
 
-mongoose.connect('mongodb://127.0.0.1:27017/annotation', {
+mongoose.connect('mongodb://mongo:27017/annotation', {
   useNewUrlParser: true,
 })
 const db = mongoose.connection
@@ -19,4 +19,8 @@ db.once('open', () => console.log('connection OK'))
 // Routing
 app.use('/', route)
 
-app.listen(3333, () => console.log('working at 3333'))
+app.listen(process.env.PORT || 5001, () =>
+  console.log(
+    process.env.PORT ? 'working at ' + process.env.PORT : 'working at 5001'
+  )
+)
