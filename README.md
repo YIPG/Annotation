@@ -13,10 +13,9 @@ docker-compose up
 
 Then open up browser, go to http://localhost:3000/ and now you can see the website! Tada!
 
-## Build
+## Deploy
 
-Now tring to deploy.... We need your help!
-
+You can pull production-built image here! ([Client](https://cloud.docker.com/repository/docker/yuyaito3/annotation-client), [Server](https://cloud.docker.com/repository/docker/yuyaito3/annotation-server), [nginx](https://cloud.docker.com/repository/docker/yuyaito3/annotation-nginx))
 
 ## Feature
 
