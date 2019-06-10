@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon --exec ts-node app.ts"
+    "start": "nodemon --exec ts-node app.ts",
+    "build": "ts-node app.ts"
   },
   "name": "myapp",
   "version": "1.0.0",
