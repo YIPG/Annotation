@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useContext, createRef } from "react"
-import styled from "styled-components"
-import { IdContext, fileNameContext } from "./index"
-import { PromiseProvider } from "mongoose"
+import React, { useState, useEffect, useContext, createRef } from 'react'
+import styled from 'styled-components'
+import { IdContext, fileNameContext } from './index'
+import { PromiseProvider } from 'mongoose'
 
 const Layer = styled.div.attrs(({ top, left, length }) => ({
   style: {
     top: top,
     left: left,
     height: length,
-    width: length
-  }
+    width: length,
+  },
 }))`
   position: absolute;
   box-sizing: border-box;
   &:hover {
-    border: ${props => !props.clicked && "2px solid plum"};
+    border: ${props => !props.clicked && '2px solid plum'};
   }
   &:focus {
     outline: 2px solid plum;
   }
-  border: ${props => props.clicked && "4px solid blueviolet"};
+  border: ${props => props.clicked && '4px solid blueviolet'};
 `
 
 export const LayerItem = props => {
@@ -39,8 +39,8 @@ export const LayerItem = props => {
     setLoading(true)
     // クリックごとに座標データを送信
 
-    const res = await fetch("http://localhost:3333/update", {
-      method: "POST",
+    const res = await fetch('/api/update', {
+      method: 'POST',
       body: JSON.stringify({
         id: id,
         fileName: fileName,
@@ -49,12 +49,12 @@ export const LayerItem = props => {
           x: props.left,
           y: props.top,
           w: props.length,
-          h: props.length
-        }
+          h: props.length,
+        },
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        'Content-Type': 'application/json',
+      },
     })
     if (res.ok) {
       setLoading(false)
@@ -66,7 +66,7 @@ export const LayerItem = props => {
 
   return (
     <Layer
-      aria-label={"x is " + props.left + " y is " + props.top}
+      aria-label={'x is ' + props.left + ' y is ' + props.top}
       ref={layerRef}
       onClick={() => {
         updateRegions(id)
@@ -74,7 +74,7 @@ export const LayerItem = props => {
       }}
       tabIndex={0}
       onKeyDown={target =>
-        target.key === "Enter" ? updateRegions(id) : props.handleKeyDown(target)
+        target.key === 'Enter' ? updateRegions(id) : props.handleKeyDown(target)
       }
       clicked={clicked}
       left={props.left}

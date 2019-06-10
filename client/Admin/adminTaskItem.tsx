@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
-import { getPercentage } from "../util"
-import { Button } from "../util/Button"
+import React from 'react'
+import styled from 'styled-components'
+import { getPercentage } from '../util'
+import { Button } from '../util/Button'
 
 const Wrapper = styled.div`
   border: 1px solid #d7dae2;
@@ -41,11 +41,9 @@ export const TaskItem = props => {
   return (
     <Wrapper>
       <TaskWrapper>
-        タスク名:{" "}
-        <Link href={"http://localhost:1234/tasks/" + props.data._id}>
-          {props.data.task}
-        </Link>
-        {" - "}縦分割数: {props.data.divide}
+        タスク名:{' '}
+        <Link href={'/tasks/' + props.data._id}>{props.data.task}</Link>
+        {' - '}縦分割数: {props.data.divide}
       </TaskWrapper>
       <h3>
         進捗:
@@ -53,8 +51,8 @@ export const TaskItem = props => {
         {clickedImages.length}枚/{allImages.length}枚中)
       </h3>
       <a
-        href={"http://localhost:3333/progress?id=" + props.data._id}
-        download={props.data.task + ".json"}
+        href={'/api/progress?id=' + props.data._id}
+        download={props.data.task + '.json'}
       >
         <DownloadButton>進捗ダウンロード(JSON)</DownloadButton>
       </a>
