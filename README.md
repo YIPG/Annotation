@@ -19,13 +19,13 @@ You can pull production-built image here! ([Client](https://cloud.docker.com/rep
 
 ## Feature
 
-### Progress
+### 1. Progress
 
 You can get the progress.json via Admin Page.
 
 <img src="https://user-images.githubusercontent.com/19145527/58790531-8683a180-862b-11e9-8903-7ef4c9256001.png" width="500px" />
 
-### Keyboard Operation
+### 2. Keyboard Operation
 
 In the task page, you can move focus via keyboard.
 
