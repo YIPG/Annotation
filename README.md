@@ -5,41 +5,18 @@
 This is the web app for annotation tasks.
 
 ## Installation
-You will need to prepare node(8.10.0 or later) and MongoDB on local. (You can install MongoDB [here](https://docs.mongodb.com/manual/installation/))
-Then, clone this repository and run commands.
+Install docker in your PC and clone this repo to your local. Then run below commands.
 
-### Yarn
 ```
-yarn
-```
-### npm
-```
-npm intasll
+docker-compose up
 ```
 
-## Quick Start
-
-### Yarn
-```
-yarn start
-```
-### npm
-```
-npm run start
-```
+Then open up browser, go to http://localhost:3000/ and now you can see the website! Tada!
 
 ## Build
 
-In order to build the app, run below commands.
+Now tring to deploy.... We need your help!
 
-### Yarn
-```
-yarn build
-```
-### npm
-```
-npm run build
-```
 
 ## Feature
 
