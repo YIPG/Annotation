@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.com/YIPG/Annotation.svg?token=4Eu75y8n2jCAEm9jFfUz&branch=master)](https://travis-ci.com/YIPG/Annotation)
+
 # Annotation App
 
 <img src="https://user-images.githubusercontent.com/19145527/58791295-e4fd4f80-862c-11e9-9dc8-2c77aa45ddbf.gif" width="600px" />
