@@ -42,4 +42,7 @@ In the task page, you can move focus via keyboard.
 ## Architecture
 
 ### Development Architecture
-<img src="https://user-images.githubusercontent.com/19145527/59350266-a6ffda00-8d56-11e9-9559-5cdc1e2fdc3c.png" width="600px" />
+<img src="https://user-images.githubusercontent.com/19145527/59350266-a6ffda00-8d56-11e9-9559-5cdc1e2fdc3c.png" width="400px" />
+
+### Production Architecture
+<img src="https://user-images.githubusercontent.com/19145527/59351073-8769b100-8d58-11e9-940f-b7859885d1fd.png" width="400px" />
