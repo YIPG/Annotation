@@ -40,4 +40,6 @@ In the task page, you can move focus via keyboard.
 - Prev Image - ⌥ + :arrow_left: 
 
 ## Architecture
+
+### Development Architecture
 <img src="https://user-images.githubusercontent.com/19145527/59350266-a6ffda00-8d56-11e9-9559-5cdc1e2fdc3c.png" width="600px" />
