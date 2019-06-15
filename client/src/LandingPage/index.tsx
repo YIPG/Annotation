@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   padding-top: 3rem;
 `
 
-const OptionWrapper = styled(Link)`
+export const OptionWrapper = styled(Link)`
   border: 1px solid #eee;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
   color: #303133;
