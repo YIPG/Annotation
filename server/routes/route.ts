@@ -7,6 +7,10 @@ import { isEqualPoint } from '../util'
 const router = express.Router()
 const upload = multer({ dest: `public/uploads/` })
 
+interface IFiles extends express.Request {
+  files: any
+}
+
 router.use(
   bodyParser.urlencoded({
     extended: true,
@@ -14,7 +18,7 @@ router.use(
 )
 router.use(bodyParser.json())
 
-router.post('/upload', upload.array('file'), async (req, res) => {
+router.post('/upload', upload.array('file'), async (req: IFiles, res) => {
   const images = req.files.map(f =>
     Object.assign(
       {},
