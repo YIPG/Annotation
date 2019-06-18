@@ -41,6 +41,9 @@ yarn build
 npm run build
 ```
 
+## Dockerize (experimental)
+You can also install apps by Docker. Go to `dockerize` branch and run `docker-compose up`
+
 ## Feature
 
 ### Progress
