@@ -1,8 +1,8 @@
-import React, { useCallback, useState, useEffect, Fragment } from "react"
-import { useDropzone } from "react-dropzone"
-import styled from "styled-components"
-import { Redirect } from "react-router-dom"
-import { Button } from "../util/Button"
+import React, { useCallback, useState, useEffect, Fragment } from 'react'
+import { useDropzone } from 'react-dropzone'
+import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
+import { Button } from '../util/Button'
 
 const Wrapper = styled.div`
   padding-top: 3rem;
@@ -44,15 +44,15 @@ const Form = styled.input`
 
 const getColor = props => {
   if (props.isDragAccept) {
-    return "#00e676"
+    return '#00e676'
   }
   if (props.isDragReject) {
-    return "#ff1744"
+    return '#ff1744'
   }
   if (props.isDragActive) {
-    return "#2196f3"
+    return '#2196f3'
   }
-  return "#eeeeee"
+  return '#eeeeee'
 }
 
 const ThumbsContainer = styled.aside`
@@ -111,9 +111,9 @@ const ButtonContainer = styled.div`
 
 export const Upload = () => {
   const [files, setFiles] = useState([])
-  const [columns, setColumns] = useState("")
-  const [name, setName] = useState("")
-  const [id, setId] = useState("")
+  const [columns, setColumns] = useState('')
+  const [name, setName] = useState('')
+  const [id, setId] = useState('')
   const [uploading, setUploading] = useState(false)
   const [successfulUploaded, setSuccessfulUploaded] = useState(false)
 
@@ -121,7 +121,7 @@ export const Upload = () => {
     setFiles(
       acceptedFiles.map(file =>
         Object.assign(file, {
-          preview: URL.createObjectURL(file)
+          preview: URL.createObjectURL(file),
         })
       )
     )
@@ -143,13 +143,13 @@ export const Upload = () => {
   const sendRequest = async files => {
     const formData = new FormData()
     files.forEach(file => {
-      formData.append("file", file, file.name)
+      formData.append('file', file, file.name)
     })
-    formData.append("label", name)
-    formData.append("column", columns)
-    return fetch("http://localhost:3333/upload", {
-      method: "POST",
-      body: formData
+    formData.append('label', name)
+    formData.append('column', columns)
+    return fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
     })
   }
 
@@ -158,8 +158,8 @@ export const Upload = () => {
     getInputProps,
     isDragActive,
     isDragReject,
-    isDragAccept
-  } = useDropzone({ onDrop, accept: "image/*" })
+    isDragAccept,
+  } = useDropzone({ onDrop, accept: 'image/*' })
 
   const thumbs = files.map(file => (
     <Thumb key={file.name}>
@@ -176,7 +176,7 @@ export const Upload = () => {
     [files]
   )
 
-  if (successfulUploaded) return <Redirect to={"tasks/" + id} />
+  if (successfulUploaded) return <Redirect to={'tasks/' + id} />
 
   return (
     <Wrapper>
@@ -205,7 +205,7 @@ export const Upload = () => {
       <ButtonContainer>
         <Button
           disabled={
-            name === "" || columns === "" || files.length === 0 || uploading
+            name === '' || columns === '' || files.length === 0 || uploading
           }
           onClick={uploadFiles}
         >
