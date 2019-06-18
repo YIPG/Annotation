@@ -2,11 +2,18 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import route from './routes/route'
+import session from 'express-session'
 
 const app = express()
 app.use(cors())
 app.use(express.static('public'))
-
+app.use(
+  session({
+    secret: 'whatever you want',
+    resave: false,
+    saveUninitialized: true,
+  })
+)
 // Check DB Connection
 
 mongoose.connect('mongodb://127.0.0.1:27017/annotation', {

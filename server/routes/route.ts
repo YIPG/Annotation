@@ -47,6 +47,7 @@ router.get('/db', async (req, res) => {
 
 router.post('/update', async (req, res) => {
   try {
+    console.log(req.sessionID)
     const targetTask = await Task.findById(req.body.id)
     const targetIndex = targetTask.images.findIndex(
       item => item.pathname === req.body.fileName
