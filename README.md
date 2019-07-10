@@ -44,6 +44,13 @@ npm run build
 ## Dockerize (experimental)
 You can also install apps by Docker. Go to `dockerize` branch and run `docker-compose up`
 
+#### Development Architecture
+<img src="https://user-images.githubusercontent.com/19145527/59350266-a6ffda00-8d56-11e9-9559-5cdc1e2fdc3c.png" width="350px" />
+
+#### Production Architecture
+<img src="https://user-images.githubusercontent.com/19145527/59351430-5938a100-8d59-11e9-8c46-871f9b87c934.png" width="350px" />
+
+
 ## Feature
 
 ### Progress
